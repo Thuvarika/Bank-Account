@@ -35,23 +35,27 @@ public class AccountEnhanced {
     }
 
     public boolean withdraw(double amount, int pin) {
-        if (!status.equals("Active")) {
-            return false;
-        }
-
-        if (!verifyPin(pin) || amount <= 0) {
-            return false;
-        }
-
-        double minimum = accountType.equals("Savings") ? 500 : 1000;
-
-        if (balance - amount < minimum) {
-            return false;
-        }
-
-        balance -= amount;
-        return true;
+    if (!status.equals("Active")) {
+        return false;
     }
+
+    if (!verifyPin(pin) || amount <= 0) {
+        return false;
+    }
+
+    double minimum = 0;
+
+    if (accountType.equals("Savings")) {
+        minimum = 500;
+    }
+
+    if (balance - amount < minimum) {
+        return false;
+    }
+
+    balance -= amount;
+    return true;
+}
 
 
 
