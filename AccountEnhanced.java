@@ -53,6 +53,8 @@ public class AccountEnhanced {
         return true;
     }
 
+
+
     public boolean closeAccount() {
         if (status.equals("Inactive")) {
             return false;
