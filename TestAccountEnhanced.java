@@ -2,9 +2,9 @@ public class TestAccountEnhanced {
 
     public static void main(String[] args) {
 
-        System.out.println("============================================================");
+        System.out.println("=".repeat(50));
         System.out.println("ENHANCED ACCOUNT TEST (BOOLEAN RETURNS)");
-        System.out.println("============================================================");
+        System.out.println("=".repeat(50));
 
         // Test 1: Valid Account Creation
         System.out.println("\n>>> Test 1: Valid Account Creation");
@@ -161,13 +161,10 @@ public class TestAccountEnhanced {
         System.out.println(formatAccount(account7));
 
 
-        System.out.println("============================================================");
+        System.out.println("=".repeat(50));
         System.out.println("ENHANCED TEST COMPLETED!");
-        System.out.println("============================================================");
+         System.out.println("=".repeat(50));
     }
-
-
-    // Method to format account details
     static String formatAccount(AccountEnhanced account) {
 
         String pinStatus;

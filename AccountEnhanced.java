@@ -1,4 +1,12 @@
 public class AccountEnhanced {
+
+    // ===== Constants =====
+    private static final double MIN_BALANCE_SAVINGS = 500.0;
+    private static final double MIN_BALANCE_CURRENT = 1000.0;
+    private static final int MIN_AGE = 18;
+    private static final int MIN_PIN = 1000;
+    private static final int MAX_PIN = 9999;
+
     private int accountNumber;
     private String name;
     private int age;
@@ -9,23 +17,37 @@ public class AccountEnhanced {
 
     public AccountEnhanced(int accountNumber, String name, int age,
                            double initialBalance, String accountType) {
+
         this.accountNumber = accountNumber;
         this.name = name;
-        this.age = age < 18 ? 18 : age;
 
+        // Minimum age
+        this.age = age < MIN_AGE ? MIN_AGE : age;
+
+        // Account type validation
         if (accountType.equals("Savings") || accountType.equals("Current")) {
             this.accountType = accountType;
         } else {
             this.accountType = "Savings";
         }
 
-        double minimum = this.accountType.equals("Savings") ? 500 : 1000;
+        // Minimum balance
+        double minimum;
+
+        if (this.accountType.equals("Savings")) {
+            minimum = MIN_BALANCE_SAVINGS;
+        } else {
+            minimum = MIN_BALANCE_CURRENT;
+        }
+
         this.balance = initialBalance < minimum ? minimum : initialBalance;
+
         this.status = "Active";
         this.pin = null;
     }
 
     public boolean deposit(double amount) {
+
         if (!status.equals("Active") || amount <= 0) {
             return false;
         }
@@ -46,7 +68,7 @@ public class AccountEnhanced {
     double minimum = 0;
 
     if (accountType.equals("Savings")) {
-        minimum = 500;
+        minimum = MIN_BALANCE_SAVINGS;
     }
 
     if (balance - amount < minimum) {
@@ -57,9 +79,8 @@ public class AccountEnhanced {
     return true;
 }
 
-
-
     public boolean closeAccount() {
+
         if (status.equals("Inactive")) {
             return false;
         }
@@ -69,6 +90,7 @@ public class AccountEnhanced {
     }
 
     public boolean reopenAccount() {
+
         if (status.equals("Active")) {
             return false;
         }
@@ -78,7 +100,8 @@ public class AccountEnhanced {
     }
 
     public boolean setPin(int pin) {
-        if (pin >= 1000 && pin <= 9999) {
+
+        if (pin >= MIN_PIN && pin <= MAX_PIN) {
             this.pin = pin;
             return true;
         }
@@ -123,6 +146,6 @@ public class AccountEnhanced {
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.age = age < MIN_AGE ? MIN_AGE : age;
     }
 }
