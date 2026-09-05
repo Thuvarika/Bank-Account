@@ -22,17 +22,23 @@ public class Account {
                     "Age must be at least 18 years.");
         }
 
-        if (!accountType.equalsIgnoreCase("Savings")
-                && !accountType.equalsIgnoreCase("Current")) {
-            throw new IllegalArgumentException(
-                    "Account type must be Savings or Current.");
-        }
+if (!accountType.equalsIgnoreCase("Savings")
+        && !accountType.equalsIgnoreCase("Current")
+        && !accountType.equalsIgnoreCase("Fixed_Deposit")
+        && !accountType.equalsIgnoreCase("Salary")) {
+    throw new IllegalArgumentException(
+            "Invalid account type.");
+}
 
         if (accountType.equalsIgnoreCase("Savings")) {
-            this.accountType = "Savings";
-        } else {
-            this.accountType = "Current";
-        }
+    this.accountType = "Savings";
+} else if (accountType.equalsIgnoreCase("Current")) {
+    this.accountType = "Current";
+} else if (accountType.equalsIgnoreCase("Fixed_Deposit")) {
+    this.accountType = "Fixed_Deposit";
+} else {
+    this.accountType = "Salary";
+}
 
         double minimumBalance = getMinimumBalance();
 
@@ -149,13 +155,14 @@ public class Account {
 
 
     private double getMinimumBalance() {
-
-        if (accountType.equalsIgnoreCase("Savings")) {
-            return MIN_BALANCE_SAVINGS;
-        }
-
+    if (accountType.equalsIgnoreCase("Savings")) {
+        return MIN_BALANCE_SAVINGS;
+    }
+    if (accountType.equalsIgnoreCase("Current")) {
         return MIN_BALANCE_CURRENT;
     }
+    return 0.0;
+}
 
     private void validateActive()
             throws InactiveAccountException {
